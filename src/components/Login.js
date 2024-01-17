@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import BACKGROUND_IMG from "../assets/home-page-background-image.jpg";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import {
@@ -11,8 +12,15 @@ import {
   validatePassword,
 } from "../utils/validate";
 import Header from "./Header";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState({});
 
@@ -48,14 +56,13 @@ const Login = () => {
       )
         .then((userCredential) => {
           // Signed in
-          const user = userCredential.user;
-          console.log(user);
+          toast("Log In Successful");
+          navigate("/browse");
           // ...
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorMessage);
+          // const errorCode = error.code;
+          toast("Invalid Credentials");
         });
     } else {
       // sign Up
@@ -67,13 +74,25 @@ const Login = () => {
       )
         .then((userCredential) => {
           // Signed up
-          const user = userCredential.user;
-          console.log(user);
+          updateProfile(auth.currentUser, {
+            displayName: name.current.value,
+          })
+            .then(() => {
+              // Profile updated
+              const { uid, email, displayName } = auth.currentUser;
+              dispatch(addUser({ uid, email, displayName }));
+              toast("Sign Up Successful");
+              // dispatch(addUser({}))
+              navigate("/browse");
+            })
+            .catch((error) => {
+              // An error occurred
+              console.log(error);
+              toast("An Error occured!!");
+            });
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorMessage);
+          toast("Email already in use");
         });
     }
   };
@@ -85,6 +104,7 @@ const Login = () => {
         <img
           className="absolute top-0 -z-20 min-h-screen h-full w-full object-cover"
           src={BACKGROUND_IMG}
+          alt=""
         />
 
         <div className="absolute top-0 -z-10 bg-black min-h-screen h-full w-full opacity-40"></div>

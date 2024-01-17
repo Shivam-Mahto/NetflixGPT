@@ -19,10 +19,10 @@ export const validateEmail = (email) => {
 };
 
 export const validatePassword = (password) => {
-  const passwordIsValid = password.length >= 4 && password.length <= 60;
+  const passwordIsValid = password.length >= 6 && password.length <= 60;
 
   if (!passwordIsValid) {
-    return "Your password must contain between 4 and 60 characters.";
+    return "Your password must contain between 6 and 60 characters.";
   }
 
   return null;
