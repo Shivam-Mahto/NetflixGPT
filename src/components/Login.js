@@ -13,12 +13,10 @@ import {
 } from "../utils/validate";
 import Header from "./Header";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -57,7 +55,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           toast("Log In Successful");
-          navigate("/browse");
           // ...
         })
         .catch((error) => {
@@ -82,8 +79,6 @@ const Login = () => {
               const { uid, email, displayName } = auth.currentUser;
               dispatch(addUser({ uid, email, displayName }));
               toast("Sign Up Successful");
-              // dispatch(addUser({}))
-              navigate("/browse");
             })
             .catch((error) => {
               // An error occurred
@@ -99,7 +94,6 @@ const Login = () => {
 
   return (
     <>
-      <Header />
       <div className="relative flex justify-center items-center">
         <img
           className="absolute top-0 -z-20 min-h-screen h-full w-full object-cover"
