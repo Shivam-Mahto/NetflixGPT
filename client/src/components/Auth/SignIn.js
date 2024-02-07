@@ -37,6 +37,8 @@ const SignIn = () => {
         }
       );
 
+      console.log(res);
+
       if (res.data.success) {
         dispatch(addUser(res.data.user));
         localStorage.setItem("token", res.data.user.token);
