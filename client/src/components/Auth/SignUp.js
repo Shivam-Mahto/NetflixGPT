@@ -53,7 +53,7 @@ const SignUp = () => {
         toast(res.data.message);
       }
     } catch (err) {
-      console.log(err);
+      toast("An error occurred");
     }
   };
 

@@ -83,7 +83,6 @@ const signUpController = async (req, res) => {
       user: { name, email, token },
     });
   } catch (err) {
-    console.log(err);
     return res
       .status(500)
       .json({ success: false, message: "Error in creating User" });
@@ -101,7 +100,6 @@ const getUser = async (req, res) => {
       user: { name: user.name, email: user.email, token },
     });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({
       success: false,
     });

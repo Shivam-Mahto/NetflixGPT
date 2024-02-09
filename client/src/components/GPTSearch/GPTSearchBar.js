@@ -34,7 +34,6 @@ const GPTSearchBar = ({ setSearching }) => {
       const finalResults = await Promise.all(promiseArray);
       dispatch(addMovieSection(["GPTSearchResults", finalResults]));
     } catch (err) {
-      console.log(err);
       toast("An error occured");
     }
   };
