@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import NETFLIX_LOGO from "../assets/Netflix_Logo_PMS.png";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { removeUser } from "../utils/userSlice";
 
 const Header = () => {
+  const [showGPTButton, setShowGPTButton] = useState(true);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -25,7 +27,7 @@ const Header = () => {
       />
       {user && (
         <div>
-          <Link to="/movie/gptsearch">
+          <Link to="/movie/gptsearch" onClick={() => setShowGPTButton(false)}>
             <button className="bg-purple-600 text-white px-2 py-1 text-sm rounded-lg md:m-4 md:px-4 md:py-2 md:font-semibold md:text-base">
               GPT Search
             </button>

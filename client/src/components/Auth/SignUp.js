@@ -65,7 +65,7 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="relative flex justify-center items-center">
+      <div className="relative flex justify-center items-center min-h-screen">
         <img
           className="absolute top-0 -z-20 min-h-screen h-full w-full object-cover"
           src={BACKGROUND_IMG}

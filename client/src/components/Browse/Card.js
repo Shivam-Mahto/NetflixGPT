@@ -11,7 +11,7 @@ const Card = ({ path, id }) => {
   return (
     <div
       onClick={() => navigate(`/movie/${id}`)}
-      className="w-36 m-2 flex-shrink-0 md:mx-3"
+      className="w-36 md:w-48 m-2 flex-shrink-0 md:mx-3"
     >
       <img className="rounded-md" alt="Movie Card" src={IMG_URL + path} />
     </div>

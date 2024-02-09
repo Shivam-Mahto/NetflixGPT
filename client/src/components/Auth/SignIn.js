@@ -37,18 +37,18 @@ const SignIn = () => {
         }
       );
 
-      console.log(res);
+      // console.log(res);
 
-      if (res.data.success) {
-        dispatch(addUser(res.data.user));
-        localStorage.setItem("token", res.data.user.token);
-        toast(res.data.message);
+      if (res.data?.success) {
+        dispatch(addUser(res.data?.user));
+        localStorage.setItem("token", res.data?.user?.token);
+        toast(res.data?.message);
         navigate("/movie/browse");
       } else {
-        toast(res.data.message);
+        toast(res.data?.message);
       }
     } catch (err) {
-      toast(err.response.data.message);
+      toast(err.response?.data?.message);
     }
   };
 
@@ -60,7 +60,7 @@ const SignIn = () => {
 
   return (
     <>
-      <div className="relative flex justify-center items-center">
+      <div className="relative flex justify-center items-center min-h-screen">
         <img
           className="absolute top-0 -z-20 min-h-screen h-full w-full object-cover"
           src={BACKGROUND_IMG}
